@@ -38,7 +38,7 @@ const Weather = (props) => {
   //runs the weather check function
   useEffect(() => {
     conditionCheck(props.weather.current.condition.text);
-  }, []);
+  }, [props.weather]);
 
   //button to get a meme from the backend
   const buttonClick = () => {
