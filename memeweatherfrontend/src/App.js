@@ -21,23 +21,36 @@ function App() {
         console.log("Weather get error", err);
       });
   };
+
+  const clearWeather = () => {
+    setWeather([]);
+  };
   return (
     <div className="App">
       <h2>Meme Weather</h2>
       <div className="search_box">
-        <form onSubmit={submitWeather}>
-          <input
-            type="text"
-            placeholder="City , State"
-            onChange={(e) => {
-              setQuery(e.target.value);
-            }}
-            value={query}
-          />
-          <button>Submit</button>
-        </form>
+        {weather.length === 0 ? (
+          <form onSubmit={submitWeather}>
+            <input
+              type="text"
+              placeholder="City , State"
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+              value={query}
+            />
+            <button>Submit</button>
+          </form>
+        ) : (
+          <div></div>
+        )}
       </div>
       {weather.length === 0 ? <div></div> : <Weather weather={weather} />}
+      {weather.length === 0 ? (
+        <div></div>
+      ) : (
+        <button onClick={clearWeather}>Clear weather</button>
+      )}
     </div>
   );
 }
