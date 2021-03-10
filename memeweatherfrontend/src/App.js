@@ -1,7 +1,93 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
+import { TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import WarningIcon from "@material-ui/icons/Warning";
+import PersonPinIcon from "@material-ui/icons/PersonPin";
 import Weather from "./Components/Weather/Weather";
+
+const StyledHome = styled.div`
+  h2 {
+    color: red;
+    text-align: center;
+    margin-top: 5%;
+  }
+  .search_box {
+    display: flex;
+    justify-content: center;
+  }
+  input {
+    text-align: center;
+    color: red;
+  }
+  .no-weather {
+    text-align: center;
+    margin-top: 15%;
+    font-size: 1.5rem;
+    color: black;
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+  .send-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+  }
+  button {
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 600px) {
+    h2 {
+      margin-top: 10%;
+    }
+  }
+
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    h2 {
+      font-size: 2rem;
+      margin-top: 10%;
+    }
+  }
+
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    h2 {
+      font-size: 2.5rem;
+      margin-top: 5%;
+    }
+    .no-weather {
+      font-size: 2rem;
+    }
+
+    button {
+      font-size: 1.3rem;
+    }
+    input {
+      font-size: 2rem;
+    }
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    h2 {
+      font-size: 2.5rem;
+      margin-top: 5%;
+    }
+    .no-weather {
+      margin-top: 5%;
+    }
+  }
+`;
 
 function App() {
   const [query, setQuery] = useState("");
@@ -25,33 +111,68 @@ function App() {
   const clearWeather = () => {
     setWeather([]);
   };
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        margin: theme.spacing(1),
+        width: "25ch",
+      },
+    },
+  }));
+  const classes = useStyles();
   return (
-    <div className="App">
+    <StyledHome>
       <h2>Meme Weather</h2>
       <div className="search_box">
         {weather.length === 0 ? (
-          <form onSubmit={submitWeather}>
-            <input
+          <form
+            onSubmit={submitWeather}
+            className={classes.root}
+            autoComplete="off"
+          >
+            <TextField
               type="text"
-              placeholder="City , State"
-              onChange={(e) => {
-                setQuery(e.target.value);
-              }}
+              id="standard-basic"
+              className="search-bar"
+              placeholder="City, State"
+              onChange={(e) => setQuery(e.target.value)}
               value={query}
-            />
-            <button>Submit</button>
+              color="primary"
+            ></TextField>
+            <div className="send-button">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={submitWeather}
+              >
+                {" "}
+                <PersonPinIcon fontSize="small" /> Send Location
+              </Button>
+            </div>
           </form>
         ) : (
           <div></div>
         )}
       </div>
-      {weather.length === 0 ? <div></div> : <Weather weather={weather} />}
+      {weather.length === 0 ? (
+        <div className="no-weather">
+          <p>
+            {" "}
+            <WarningIcon color="action" /> No weather to display{" "}
+            <WarningIcon color="action" />
+          </p>
+          <p>Press Send Location to submit your city , state</p>
+        </div>
+      ) : (
+        <Weather weather={weather} />
+      )}
       {weather.length === 0 ? (
         <div></div>
       ) : (
         <button onClick={clearWeather}>Clear weather</button>
       )}
-    </div>
+    </StyledHome>
   );
 }
 
