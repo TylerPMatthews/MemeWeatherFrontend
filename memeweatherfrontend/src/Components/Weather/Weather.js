@@ -1,6 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MemeDisplay from "../MemeDisplay";
+import Button from "@material-ui/core/Button";
+import styled from 'styled-components';
+const StyledWeather = styled.div`
+  h2 {
+    font-size: 1.3rem;
+  }
+  p {
+    text-align: center;
+    color: black;
+  }
+  .img-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  img {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .weather-container img {
+    width: 5rem;
+    height: 5rem;
+  }
+  .clear-button{
+    display:flex;
+    justify-content:center;
+    margin:5% 0;
+    color:white
+  }
+`;
 
 const Weather = (props) => {
   //Sets state to be searched from backend depending on weather
@@ -62,15 +93,15 @@ const Weather = (props) => {
   };
 
   return (
-    <div>
+    <StyledWeather>
       <h2>
         {props.weather.location.name} , {props.weather.location.region}
       </h2>
-      <div>
+      <div className='clear-button'>
         {memeDisplay.length === 0 ? (
-          <button onClick={buttonClick}>Show Weather Meme</button>
+          <Button onClick={buttonClick} className='clear-button' variant="contained" color="primary">Show Weather Meme</Button>
         ) : (
-          <button onClick={clearMeme}>Clear</button>
+          <Button onClick={clearMeme} className='clear-button' variant="contained" color="primary">Clear Weather Meme</Button>
         )}
       </div>
       <p>Temp: {Math.round(props.weather.current.temp_f)}f</p>
@@ -92,7 +123,7 @@ const Weather = (props) => {
       <p>Wind Direction: {props.weather.current.wind_dir}</p>
       <p>Humidity: {props.weather.current.humidity} %</p>
       <p>Feels like: {Math.round(props.weather.current.feelslike_f)} f</p>
-    </div>
+    </StyledWeather>
   );
 };
 export default Weather;

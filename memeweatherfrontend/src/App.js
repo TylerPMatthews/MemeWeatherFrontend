@@ -30,7 +30,7 @@ const StyledHome = styled.div`
     color: black;
     margin-right: 5%;
     margin-left: 5%;
-  }
+  }                  
   .send-button {
     display: flex;
     justify-content: center;
@@ -43,6 +43,11 @@ const StyledHome = styled.div`
   }
   button:hover {
     cursor: pointer;
+  }
+  .btnclss{
+    display:flex;
+    justify-content:center;
+    margin:5%;
   }
 
   @media only screen and (max-width: 600px) {
@@ -170,7 +175,9 @@ function App() {
       {weather.length === 0 ? (
         <div></div>
       ) : (
-        <button onClick={clearWeather}>Clear weather</button>
+        <div className='btnclss'>
+        <Button onClick={clearWeather} variant="contained" color="primary">Clear weather</Button>
+        </div>
       )}
     </StyledHome>
   );
