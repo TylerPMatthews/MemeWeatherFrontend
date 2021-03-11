@@ -31,6 +31,26 @@ const StyledWeather = styled.div`
     margin:5% 0;
     color:white
   }
+
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+   
+  }
+
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+   h2{
+     font-size:1.7rem;
+   }
+   p{
+    font-size:1.7rem;
+  }
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+   
+  }
 `;
 
 const Weather = (props) => {
@@ -63,6 +83,10 @@ const Weather = (props) => {
       check === "Blizzard"
     ) {
       setMeme("snoweather");
+    }else if(
+      check === "Overcast"
+    ){
+      setMeme("coverweather")
     }
   };
 
