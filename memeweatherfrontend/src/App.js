@@ -30,7 +30,7 @@ const StyledHome = styled.div`
     color: black;
     margin-right: 5%;
     margin-left: 5%;
-  }                  
+  }
   .send-button {
     display: flex;
     justify-content: center;
@@ -44,10 +44,10 @@ const StyledHome = styled.div`
   button:hover {
     cursor: pointer;
   }
-  .btnclss{
-    display:flex;
-    justify-content:center;
-    margin:5%;
+  .btnclss {
+    display: flex;
+    justify-content: center;
+    margin: 5%;
   }
 
   @media only screen and (max-width: 600px) {
@@ -73,11 +73,6 @@ const StyledHome = styled.div`
     .no-weather {
       font-size: 2rem;
     }
-
-    button {
-      font-size: 1.3rem;
-    }
-  
   }
 
   /* Large devices (laptops/desktops, 992px and up) */
@@ -173,8 +168,10 @@ function App() {
       {weather.length === 0 ? (
         <div></div>
       ) : (
-        <div className='btnclss'>
-        <Button onClick={clearWeather} variant="contained" color="primary">Clear weather</Button>
+        <div className="btnclss">
+          <Button onClick={clearWeather} variant="contained" color="primary">
+            Clear weather
+          </Button>
         </div>
       )}
     </StyledHome>
