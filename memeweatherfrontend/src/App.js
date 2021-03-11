@@ -77,9 +77,7 @@ const StyledHome = styled.div`
     button {
       font-size: 1.3rem;
     }
-    input {
-      font-size: 2rem;
-    }
+  
   }
 
   /* Large devices (laptops/desktops, 992px and up) */
